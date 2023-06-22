@@ -15,7 +15,7 @@ Options for Task 3:
 |     | Parameter sharing reduces complexity  | Can handle sequential and temporal data    | Parallelizable, efficient computation   |
 |     | Computationally efficient	| Robust to noise and missing data	| Self-attention captures global context |
 |     | Good for feature extraction	| Supports online learning	| Allows for parallel training |
-
-|     | Limited capture of global dependencies	|  Computationally expensive	| Memory-intensive for large sequences |
+| Cons   | Limited capture of global dependencies	|  Computationally expensive	| Memory-intensive for large sequences |
 |     | May require stacking layers for depth	| Susceptible to vanishing/exploding grad.	| Lack of positional information |
 |     | Assumes stationarity in the data	| Longer training time	| Limited interpretability |
+|     | May struggle with variable-length input	| Difficulty handling irregular intervals | |
