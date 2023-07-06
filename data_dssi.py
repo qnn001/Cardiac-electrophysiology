@@ -27,15 +27,11 @@ def read_data(data_dir: Union[str, Path] = "data"):
     
     file_pairs = ct.read_data_dirs(data_dirs)
     
-    #print('fp',len(file_pairs[0][0])) # (lf1 = 145)
-    lf1 = np.load(file_pairs[0][0])
-    #print('fp_1_shape',lf1.shape) # (500, 10)
-    lf1 = ct.get_standard_leads(lf1)
-    #print('fp_1_shape',lf1.shape) # (500, 12)
+    lf1 = np.load(file_pairs[0][0]) # (500, 10)
+    lf1 = ct.get_standard_leads(lf1) # (500, 12)
 
-    lf2 = np.load(file_pairs[0][1])
-    lf2 = ct.get_activation_time(lf2)
-    #print('fp_2_shape',lf2.shape) # (75, 1)
+    lf2 = np.load(file_pairs[0][1]) # (75, 500)
+    lf2 = ct.get_activation_time(lf2) # (75, 1)
 
     data_book= []
     count = 0
@@ -51,7 +47,7 @@ def read_data(data_dir: Union[str, Path] = "data"):
         data_book.append((x1, x2))
         count+=1
 
-        if(count>10):
+        if(count>10): # remove these lines while implementing.
             break
     
     df = pd.DataFrame(data_book, columns=['leads', 'act'])
@@ -68,9 +64,9 @@ class Custom_dataset(Dataset):
     def __getitem__(self, idx):
 
         x = self.img_labels.iloc[idx, 0]
-        x = torch.tensor(x, dtype =float)
+        x = torch.tensor(x, dtype=torch.float32) # Pytorch default for nn.models
         y = self.img_labels.iloc[idx, 1]
-        y = torch.tensor(y, dtype =float)
+        y = torch.tensor(y, dtype =torch.float32) # Pytorch default for nn.models
         return x, y
 
 if __name__ == "__main__":
