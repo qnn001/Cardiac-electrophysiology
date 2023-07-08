@@ -1,6 +1,6 @@
 DSSI Task 3
 Model : Transformer Encoder + FCN , Transformer Encoder + CNN
-Owner : @anshumansinha16
+Owner and Copyrights : @anshumansinha16
 Data : Check data bash script
 Training : Flash LC System
 Credits : @karpathy, @KasperGroesLudvigsen, @landajuela
