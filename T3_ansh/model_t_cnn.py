@@ -9,6 +9,8 @@ import utils
 import data_dssi as ds
 import matplotlib.pyplot as plt
 
+model_path = './save_model/model.pt'
+
 # /Users/anshumansinha/DSSI/model.py
 
 # Hyperparams
@@ -184,6 +186,7 @@ def evaluate_test(model: nn.Module) -> float:
     
     model.eval()  # turn on evaluation mode
     total_loss = 0.
+    err_list = []
 
     for i, v in training_loader: # replace with test_loader.
         x_dat, tar = i,v
@@ -204,6 +207,10 @@ def evaluate_test(model: nn.Module) -> float:
     #targets = v_dat.reshape(-1, 75)
 
     total_loss = criterion(output, target).item()
+
+    err = output-target
+
+    err_list.append(err)
 
     print('-' * 89)
     print('targets.shape',target.shape)
@@ -259,7 +266,7 @@ if __name__ == "__main__":
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, 1.0, gamma=0.95)
 
     best_val_loss = float('inf')
-    epochs = 100
+    epochs = 10
     t_loss = []
     v_loss = []
     #model = TransformerModel()
@@ -290,8 +297,8 @@ if __name__ == "__main__":
 
             scheduler.step()
 
-
-        model.load_state_dict(torch.load(best_model_params_path)) # load best model states
+        torch.save(model.state_dict(), model_path)
+        model.load_state_dict(torch.load(model_path)) # load best model states
         
         #test_1 = train_data[0]
         #print('test_1',test_1.shape)
