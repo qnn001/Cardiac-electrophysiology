@@ -59,7 +59,7 @@ def evaluate_test(model: nn.Module, training_loader) -> float:
         output = [i.reshape(75,-1) for i in output] # print(tar[0].shape) # (75, 500)
 
         for i in range(len(output)):
-            err = output[i]-tar[i]
+            err = np.abs(output[i]-tar[i])
             print('err',err.shape)
             err_list.append(torch.tensor(err))
     
