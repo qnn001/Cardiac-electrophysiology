@@ -36,7 +36,7 @@ def evaluate_test(model: nn.Module, training_loader) -> float:
         tar = tar.reshape(-1, 75)
         target = tar[0]
 
-        err = output-target
+        err = np.abs(output-target)
         err_list.append(err)
     
     return err_list
