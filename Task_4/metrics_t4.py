@@ -32,7 +32,7 @@ def evaluate_test(model: nn.Module, training_loader) -> float:
         x_dat, tar = i,v
         print(tar.shape) # torch.Size([5, 500, 75])
         num_sub = (tar.shape[0])
-        tar= tar.reshape(5,1,-1)
+        tar= tar.reshape(num_sub,1,-1)
         print(tar.shape)
         tar = np.vstack(tar)
         print(tar.shape) # (5, 37500)
